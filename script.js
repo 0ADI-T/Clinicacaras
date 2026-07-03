@@ -9,19 +9,37 @@ document.addEventListener('DOMContentLoaded', function () {
     const hamburguesa = document.getElementById('hamburguesa');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link');
-    const btnEscribenos = document.getElementById('btnEscribenos');
+    const btnEscribenosFlotante = document.getElementById('btnEscribenosFlotante');
     const modal = document.getElementById('modalFormulario');
     const modalCerrar = document.getElementById('modalCerrar');
     const formModal = document.getElementById('formModal');
 
-    // ----- 1. MENÚ HAMBURGUESA (MÓVIL) -----
+    // ----- 1. REFUERZO PARA MÓVILES MODERNOS -----
+    document.addEventListener('touchstart', function() {}, {passive: true});
+
+    if (hamburguesa) {
+        hamburguesa.style.display = 'flex';
+        hamburguesa.style.position = 'relative';
+        hamburguesa.style.zIndex = '2000';
+    }
+
+    // ----- 2. MENÚ HAMBURGUESA (MÓVIL) -----
     if (hamburguesa && navMenu) {
+
+        // Abrir / cerrar menú al hacer clic en la hamburguesa
         hamburguesa.addEventListener('click', function () {
             hamburguesa.classList.toggle('activo');
             navMenu.classList.toggle('abierto');
-            document.body.style.overflow = navMenu.classList.contains('abierto') ? 'hidden' : '';
+
+            // Evita que el fondo se desplace mientras el menú está abierto
+            if (navMenu.classList.contains('abierto')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
 
+        // Cerrar menú al hacer clic en un enlace del menú
         navLinks.forEach(function (link) {
             link.addEventListener('click', function () {
                 hamburguesa.classList.remove('activo');
@@ -30,17 +48,23 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+        // Cerrar menú al hacer clic fuera del menú (en el fondo oscuro)
         document.addEventListener('click', function (e) {
-            if (!navMenu.contains(e.target) && !hamburguesa.contains(e.target) && navMenu.classList.contains('abierto')) {
-                hamburguesa.classList.remove('activo');
-                navMenu.classList.remove('abierto');
-                document.body.style.overflow = '';
+            // Si el clic no fue dentro del menú ni en la hamburguesa
+            if (!navMenu.contains(e.target) && !hamburguesa.contains(e.target)) {
+                // Y el menú está abierto
+                if (navMenu.classList.contains('abierto')) {
+                    hamburguesa.classList.remove('activo');
+                    navMenu.classList.remove('abierto');
+                    document.body.style.overflow = '';
+                }
             }
         });
     }
 
-    // ----- 2. EFECTO DEL HEADER AL HACER SCROLL -----
+    // ----- 3. EFECTO DEL HEADER AL HACER SCROLL -----
     window.addEventListener('scroll', function () {
+        // Agrega clase cuando el usuario baja la página
         if (window.scrollY > 50) {
             header.classList.add('activo');
         } else {
@@ -48,7 +72,31 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // ----- 3. MODAL (ABRIR / CERRAR) -----
+    // ----- 4. DETECCIÓN DE SECCIÓN ACTIVA (PINTADO DORADO) -----
+    function actualizarEnlaceActivo() {
+        const secciones = document.querySelectorAll('section[id]');
+        const scrollY = window.pageYOffset + 100;
+
+        secciones.forEach(seccion => {
+            const sectionTop = seccion.offsetTop - 100;
+            const sectionHeight = seccion.offsetHeight;
+            const sectionId = seccion.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                // Elimina la clase activo de todos los enlaces
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('activo'));
+                // Añade la clase activo al enlace que coincide con el id de la sección
+                const enlaceActivo = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+                if (enlaceActivo) {
+                    enlaceActivo.classList.add('activo');
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', actualizarEnlaceActivo);
+
+    // ----- 5. MODAL (ABRIR / CERRAR) -----
     function abrirModal() {
         if (modal) {
             modal.classList.add('activo');
@@ -63,41 +111,46 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    if (btnEscribenos) {
-        btnEscribenos.addEventListener('click', abrirModal);
+    // Abrir modal con el botón flotante
+    if (btnEscribenosFlotante) {
+        btnEscribenosFlotante.addEventListener('click', abrirModal);
     }
 
+    // Cerrar modal con la X
     if (modalCerrar) {
         modalCerrar.addEventListener('click', cerrarModal);
     }
 
-    // ----- 4. ENVIAR FORMULARIO DEL MODAL -----
+    // ----- 6. ENVIAR FORMULARIO DEL MODAL -----
     if (formModal) {
         formModal.addEventListener('submit', function (e) {
-            e.preventDefault();
+            const nombre = formModal.querySelector('input[name="nombre"]').value.trim();
+            const email = formModal.querySelector('input[name="email"]').value.trim();
+            const telefono = formModal.querySelector('input[name="telefono"]').value.trim();
+            const especialidad = formModal.querySelector('select[name="especialidad"]').value;
 
-            const nombre = formModal.querySelector('input[type="text"]').value.trim();
-            const email = formModal.querySelector('input[type="email"]').value.trim();
-            const telefono = formModal.querySelector('input[type="tel"]').value.trim();
-            const especialidad = formModal.querySelector('select').value;
+            let errores = [];
 
-            if (!nombre || !email || !telefono || !especialidad) {
-                mostrarNotificacion('Por favor, completa todos los campos.', 'error');
-                return;
+            if (!nombre) errores.push('Completa tu nombre.');
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errores.push('Ingresa un correo válido.');
+            if (!telefono) errores.push('Ingresa tu teléfono.');
+            if (!especialidad) errores.push('Selecciona una especialidad.');
+
+            if (errores.length > 0) {
+                e.preventDefault(); // Solo evita el envío si hay errores
+                mostrarNotificacion(errores.join(' '), 'error');
             }
-
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                mostrarNotificacion('Ingresa un correo electrónico válido.', 'error');
-                return;
-            }
-
-            mostrarNotificacion('¡Gracias ' + nombre.split(' ')[0] + '! Te contactaremos pronto.', 'success');
-            formModal.reset();
-            cerrarModal();
+            // Si no hay errores, el formulario se envía normalmente a enviar.php
         });
     }
 
-    // ----- 5. SISTEMA DE NOTIFICACIONES TOAST -----
+    // ----- 7. MOSTRAR MENSAJE DE ÉXITO AL VOLVER DEL PHP -----
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('enviado') === '1') {
+        mostrarNotificacion('¡Gracias! Tu solicitud fue enviada. Te contactaremos pronto.', 'success');
+    }
+
+    // ----- 8. SISTEMA DE NOTIFICACIONES TOAST -----
     function mostrarNotificacion(mensaje, tipo) {
         const existente = document.querySelector('.toast-notificacion');
         if (existente) existente.remove();
@@ -171,30 +224,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     `;
     document.head.appendChild(estiloToast);
+
 });
-// ==========================================
-// DETECCIÓN DE SECCIÓN ACTIVA AL HACER SCROLL
-// ==========================================
-function actualizarEnlaceActivo() {
-    const secciones = document.querySelectorAll('section[id]'); // selecciona todas las secciones con id
-    const scrollY = window.pageYOffset + 100; // compensa la altura del header fijo
-
-    secciones.forEach(seccion => {
-        const sectionTop = seccion.offsetTop - 100;
-        const sectionHeight = seccion.offsetHeight;
-        const sectionId = seccion.getAttribute('id');
-
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            // Elimina la clase activo de todos los enlaces
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('activo'));
-            // Añade la clase activo al enlace que coincide con el id de la sección
-            const enlaceActivo = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            if (enlaceActivo) {
-                enlaceActivo.classList.add('activo');
-            }
-        }
-    });
-}
-
-// Escucha el evento scroll
-window.addEventListener('scroll', actualizarEnlaceActivo);
