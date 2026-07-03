@@ -49,6 +49,11 @@ a {
     color: inherit;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;   /* altura del header en escritorio */
+}
+
 body {
     font-family: var(--fuente-texto);
     background-color: var(--fondo-oscuro);
@@ -56,6 +61,8 @@ body {
     line-height: 1.7;
     min-height: 100vh;
 }
+
+
 
 /* ===== 2. HEADER ===== */
 .header {
@@ -1082,6 +1089,7 @@ body {
     color: var(--dorado);
 }
 
+
 /* ==========================================
    19. MEDIA QUERIES AGRUPADAS POR TAMAÑO
    ========================================== */
@@ -1141,6 +1149,10 @@ body {
 @media (max-width: 768px) {
 
     /* Header y menú */
+    html {
+        scroll-padding-top: 65px;   /* header más bajo en móvil */
+    }
+
     .navbar {
         min-height: 65px;
         padding: 0 4%;
@@ -1394,6 +1406,15 @@ body {
         width: 45px;
         height: 45px;
         font-size: 1.4rem;
+    }
+}
+
+/* ==========================================
+   21. PARCHE FINAL – OCULTAR HAMBURGUESA EN ESCRITORIO
+   ========================================== */
+@media (min-width: 769px) {
+    .hamburguesa {
+        display: none !important;
     }
 }
 /* ==========================================
