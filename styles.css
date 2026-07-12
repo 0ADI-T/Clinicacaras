@@ -1,95 +1,87 @@
-/* ==========================================
-   CLÍNICA CARAS - HOJA DE ESTILOS COMPLETA
-   ========================================== */
-
-/* ===== VARIABLES ===== */
+/* ============================================================
+   VARIABLES – PALETA CARAS
+   ============================================================ */
 :root {
-    --dorado-claro: #e4c058;
-    --dorado:       #d3ae36;
-    --dorado-oscuro:#b8921c;
+    /* ---- Nuevos nombres (usa estos de ahora en adelante) ---- */
+    --gold-light: #e4c058;
+    --gold: #d3ae36;
+    --gold-dark: #b8921c;
+    --rose-light: #cd737b;
+    --rose: #a55b6c;
+    --rose-dark: #8c4b5a;
+    --bg-dark: #0c1621;
+    --bg-surface: #15212e;
+    --bg-card: #1b2a3a;
+    --bg-input: #1e2d3d;
+    --white: #ffffff;
+    --text-primary: #f0f3f7;
+    --text-secondary: #b0c0d0;
+    --text-muted: #7a8a9a;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+    --shadow-md: 0 8px 30px rgba(0,0,0,0.4);
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.5);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    --transition-smooth: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-    --rosa-claro:   #cd737b;
-    --rosa:         #a55b6c;
-    --rosa-oscuro:  #8c4b5a;
-
-    --fondo-oscuro:   #0c1621;
-    --fondo-superficie:#15212e;
-    --fondo-tarjeta:  #1b2a3a;
-    --fondo-input:    #1e2d3d;
-
-    --blanco:       #ffffff;
-    --texto-principal:  #f0f3f7;
-    --texto-secundario: #ffffff;
-    --texto-apagado:    #7a8a9a;
-
-    --fuente-titulos: 'Playfair Display', Georgia, serif;
-    --fuente-texto:   'Raleway', 'Helvetica Neue', sans-serif;
-
-    --sombra-chica:  0 2px 8px rgba(0,0,0,0.3);
-    --sombra-media:  0 8px 30px rgba(0,0,0,0.4);
-    --sombra-grande: 0 20px 50px rgba(0,0,0,0.5);
-
-    --borde-redondo: 16px;
-    --transicion: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    /* ---- Alias para variables viejas (evita que se rompa el CSS) ---- */
+    --dorado-claro: var(--gold-light);
+    --dorado: var(--gold);
+    --dorado-oscuro: var(--gold-dark);
+    --rosa-claro: var(--rose-light);
+    --rosa-oscuro: var(--rose-dark);
+    --fondo-oscuro: var(--bg-dark);
+    --fondo-superficie: var(--bg-surface);
+    --fondo-tarjeta: var(--bg-card);
+    --fondo-input: var(--bg-input);
+    --blanco: var(--white);
+    --texto-principal: var(--text-primary);
+    --texto-secundario: var(--text-secondary);
+    --texto-apagado: var(--text-muted);
+    --fuente-titulos: var(--font-display);
+    --fuente-texto: var(--font-body);
+    --sombra-chica: var(--shadow-sm);
+    --sombra-media: var(--shadow-md);
+    --sombra-grande: var(--shadow-lg);
+    --borde-redondo: var(--radius);
+    --transicion: var(--transition);
 }
 
-/* ===== 1. RESET BÁSICO ===== */
+/* ============================================================
+   RESET Y ESTILOS BASE
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-ul {
-    list-style: none;
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    scroll-padding-top: 80px; /* Espacio para el header fijo */
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+    transition: var(--transition);
 }
 
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 85px;   /* altura del header en escritorio */
-}
-
-body {
-    font-family: var(--fuente-texto);
-    background-color: var(--fondo-oscuro);
-    color: var(--texto-principal);
-    line-height: 1.7;
-    min-height: 100vh;
-}
-
-
-
-/* ===== 2. HEADER ===== */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(12, 22, 33, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(230, 222, 222, 0.05);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.header.activo {
-    background: rgba(12, 22, 33, 0.98);
-    box-shadow: var(--sombra-media);
-}
-
-/* ===== 3. NAVBAR ===== */
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 85px;
-    padding: 0 5%;
+ul {
+    list-style: none;
 }
 
 /* ===== 4. LOGO ===== */
@@ -100,10 +92,6 @@ body {
     align-items: flex-start;
     height: 75px;
     overflow: hidden;
-}
-
-body {
-    padding-top: 85px;
 }
 
 .logo-img {
@@ -125,6 +113,163 @@ body {
     color: var(--texto-apagado);
     font-weight: 500;
     margin-top: 2px;
+}
+/* ============================================================
+   BOTONES
+   ============================================================ */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    text-align: center;
+    font-family: var(--font-body);
+}
+
+/* Botón primario (relleno dorado oscuro) */
+.btn-primary {
+    background: var(--gold-dark);
+    color: var(--bg-dark);
+    box-shadow: 0 6px 20px rgba(184, 146, 28, 0.35);
+}
+.btn-primary:hover {
+    background: var(--gold);
+    box-shadow: 0 10px 28px rgba(211, 174, 54, 0.45);
+    transform: translateY(-3px);
+}
+
+/* Botón outline (borde dorado claro) */
+.btn-outline {
+    background: transparent;
+    color: var(--gold-light);
+    border: 2px solid var(--gold-light);
+}
+.btn-outline:hover {
+    background: var(--gold-light);
+    color: var(--bg-dark);
+    border-color: var(--gold-light);
+    transform: translateY(-3px);
+}
+
+/* Botón específico para el header */
+.btn-header {
+    background: var(--gold-dark);
+    color: var(--bg-dark);
+    padding: 10px 22px;
+    font-size: 0.85rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(184, 146, 28, 0.4);
+}
+.btn-header:hover {
+    background: var(--gold);
+    box-shadow: 0 6px 20px rgba(211, 174, 54, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Botón que ocupa todo el ancho */
+.btn-block {
+    width: 100%;
+}
+
+/* ============================================================
+   ETIQUETAS Y TÍTULOS
+   ============================================================ */
+.seccion-label {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.seccion-titulo {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.seccion-descripcion {
+    color: var(--text-secondary);
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+.seccion-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* ============================================================
+   HEADER (Barra de navegación fija)
+   ============================================================ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(12, 22, 33, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition-smooth);
+}
+
+/* Cuando la página ha hecho scroll, se oscurece y añade sombra */
+.header.scrolled {
+    background: rgba(12, 22, 33, 0.98);
+    box-shadow: var(--shadow-md);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 75px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+}
+
+.logo-text {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--rose);       /* Color de las letras del logo */
+    letter-spacing: 3px;
+    transition: var(--transition);
+}
+
+.logo-sub {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.logo:hover .logo-text {
+    color: var(--rose-light);
 }
 
 /* ===== 5. MENÚ ===== */
@@ -149,25 +294,6 @@ body {
     background: rgba(211, 174, 54, 0.1);
 }
 
-/* ===== 6. BOTÓN HEADER ===== */
-.btn-header {
-    display: inline-block;
-    padding: 10px 22px;
-    background: var(--dorado-oscuro);
-    color: var(--fondo-oscuro);
-    font-weight: 600;
-    font-size: 0.85rem;
-    border-radius: 50px;
-    box-shadow: 0 4px 14px rgba(184, 146, 28, 0.35);
-    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-}
-
-.btn-header:hover {
-    background: var(--dorado);
-    box-shadow: 0 6px 20px rgba(211, 174, 54, 0.5);
-    transform: translateY(-2px);
-}
-
 /* ===== 7. HAMBURGUESA ===== */
 .hamburguesa {
     display: none;
@@ -187,7 +313,21 @@ body {
     transition: 0.3s;
 }
 
-/* ===== 8. HERO ===== */
+
+/* Animación para convertir hamburguesa en "X" */
+.hamburguesa.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+.hamburguesa.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburguesa.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* ============================================================
+   HERO (Sección principal)
+   ============================================================ */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -200,35 +340,79 @@ body {
     overflow: hidden;
 }
 
-.hero-contenido {
+/* Capa de superposición para degradado */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, rgba(12, 22, 33, 0.85) 100%);
+    z-index: 1;
+}
+
+/* Partículas flotantes (fondo animado) */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0.2;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.25;
+    }
+    90% {
+        opacity: 0.25;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Contenido del hero */
+.hero-content {
+    position: relative;
+    z-index: 3;
     max-width: 800px;
-    margin: 0 auto;
 }
 
 .hero-subtitulo {
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 6px;
-    color: var(--dorado-claro);
+    color: var(--gold-light);
     margin-bottom: 12px;
     font-weight: 400;
 }
 
 .hero-titulo {
-    font-family: var(--fuente-titulos);
+    font-family: var(--font-display);
     font-size: 7rem;
     font-weight: 700;
-    color: var(--rosa);
+    color: var(--rose);
     letter-spacing: 12px;
-    margin-bottom: 20px;
-    line-height: 1;
+    margin-bottom: 8px;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    line-height: 1;
 }
 
-.hero-eslogan {
-    font-family: var(--fuente-titulos);
+
+.hero-tagline {
+    font-family: var(--font-display);
     font-size: 1.6rem;
-    color: var(--dorado-claro);
+    color: var(--gold-light);
     font-style: italic;
     margin-bottom: 20px;
 }
@@ -243,129 +427,350 @@ body {
     margin-right: auto;
 }
 
-.hero-descripcion strong {
-    color: var(--dorado-claro);
-    font-weight: 600;
-}
 
-.hero-botones {
+/* Indicador de scroll (flecha animada hacia abajo) */
+.scroll-indicador {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 3;
+    animation: bounceDown 2s ease infinite;
 }
 
-/* ===== 9. BOTONES GENERALES ===== */
-.btn {
-    display: inline-block;
-    padding: 14px 32px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    border: none;
-    text-align: center;
-    font-family: var(--fuente-texto);
+.scroll-indicador span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    opacity: 0.7;
 }
 
-.btn-primario {
-    background: var(--dorado-oscuro);
-    color: var(--fondo-oscuro);
-    box-shadow: 0 6px 20px rgba(184, 146, 28, 0.35);
+@keyframes bounceDown {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(12px);
+    }
 }
 
-.btn-primario:hover {
-    background: var(--dorado);
-    box-shadow: 0 10px 28px rgba(211, 174, 54, 0.45);
-    transform: translateY(-3px);
+
+/* ============================================================
+   SECCIÓN ESPECIALIDADES
+   ============================================================ */
+.especialidades {
+    padding: 100px 5%;
+    background: var(--bg-dark);
 }
 
-.btn-secundario {
-    background: transparent;
-    color: var(--dorado-claro);
-    border: 2px solid var(--dorado-claro);
+.especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 28px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.btn-secundario:hover {
-    background: var(--dorado-claro);
-    color: var(--fondo-oscuro);
-    border-color: var(--dorado-claro);
-    transform: translateY(-3px);
-}
-
-/* ===== 10. RESUMEN ===== */
-.resumen {
-    padding: 60px 5%;
-    background: var(--fondo-superficie);
-    text-align: center;
-}
-
-.seccion-titulo {
-    font-family: var(--fuente-titulos);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--texto-principal);
-    margin-bottom: 16px;
-    line-height: 1.2;
-}
-
-.seccion-descripcion {
-    color: var(--texto-secundario);
-    max-width: 650px;
-    margin: 0 auto 40px;
-    font-size: 1.05rem;
-    line-height: 1.6;
-}
-
-.resumen-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.resumen-card {
-    background: var(--fondo-tarjeta);
-    border-radius: var(--borde-redondo);
+/* Cada tarjeta de especialidad */
+.especialidad-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
     padding: 36px 28px;
     text-align: center;
-    flex: 1 1 250px;
-    max-width: 280px;
-    box-shadow: var(--sombra-chica);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-smooth);
+    cursor: default;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
 }
 
-.resumen-card:hover {
+/* Línea decorativa superior al hacer hover */
+.especialidad-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--rose));
+    transform: scaleX(0);
+    transition: transform 0.45s ease;
+    transform-origin: left;
+}
+
+.especialidad-card:hover::before {
+    transform: scaleX(1);
+}
+
+.especialidad-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--sombra-grande);
-    border-color: rgba(211, 174, 54, 0.2);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(184, 146, 28, 0.3);
 }
 
-.resumen-card i {
-    font-size: 2.8rem;
-    color: var(--dorado);
-    margin-bottom: 16px;
-    display: block;
-    transition: transform 0.3s ease;
+.card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(211, 174, 54, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.8rem;
+    color: var(--gold);
+    transition: var(--transition);
 }
 
-.resumen-card:hover i {
+.especialidad-card:hover .card-icon {
+    background: var(--gold-dark);
+    color: var(--bg-dark);
     transform: scale(1.1);
 }
 
-.resumen-card h3 {
-    font-family: var(--fuente-titulos);
+.especialidad-card h3 {
+    font-family: var(--font-display);
     font-size: 1.2rem;
-    color: var(--texto-principal);
-    margin: 0;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.especialidad-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ============================================================
+   SECCIÓN LABORATORIO / PRÓTESIS
+   ============================================================ */
+.protesis {
+    padding: 100px 5%;
+    background: var(--bg-surface);
+}
+
+.protesis-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Contenedor de la imagen (placeholder) */
+.image-wrapper {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.image-placeholder {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--rose-dark) 100%);
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 5rem;
+    gap: 16px;
+    transition: var(--transition-smooth);
+}
+
+.image-placeholder span {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 4px;
     font-weight: 600;
 }
 
-/* ===== 11. FOOTER ===== */
+/* Tarjeta flotante sobre la imagen */
+.floating-card {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-lg);
+    font-weight: 600;
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    animation: floatCard 3s ease-in-out infinite;
+}
+
+.floating-card i {
+    font-size: 1.6rem;
+    color: var(--gold);
+}
+
+@keyframes floatCard {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* Texto y contenido de la sección */
+.protesis-highlight {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.protesis-text {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.protesis-text strong {
+    color: var(--gold-light);
+}
+
+/* Lista de características (dos columnas) */
+.protesis-list {
+    list-style: none;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.protesis-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.protesis-list i {
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+/* Ventajas numéricas */
+.protesis-ventajas {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.ventaja-item {
+    text-align: center;
+    background: rgba(211, 174, 54, 0.1);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    min-width: 100px;
+    flex: 1;
+}
+
+.ventaja-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.ventaja-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ============================================================
+   SECCIÓN EQUIPO
+   ============================================================ */
+.equipo {
+    padding: 100px 5%;
+    background: var(--bg-dark);
+}
+
+.equipo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.equipo-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 36px 24px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-smooth);
+}
+
+.equipo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(211, 174, 54, 0.2), rgba(165, 91, 108, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2.5rem;
+    color: var(--gold);
+    transition: var(--transition);
+}
+
+.equipo-card:hover .avatar-placeholder {
+    background: var(--rose);
+    color: var(--white);
+}
+
+.equipo-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.equipo-rol {
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.equipo-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .footer {
     background: var(--fondo-oscuro);
     color: var(--texto-apagado);
@@ -464,431 +869,6 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.3);
-}
-
-/* ===== 12. WHATSAPP FLOTANTE (REGLA BASE) ===== */
-.whatsapp-flotante {
-    position: fixed;
-    bottom: 30px;          /* escritorio */
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: #25D366;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-    z-index: 1500;
-}
-
-.whatsapp-flotante:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 28px rgba(37, 211, 102, 0.6);
-}
-
-/* Nuevo botón Escribenos flotante */
-.btn-flotante-escribenos {
-    position: fixed;
-    bottom: 30px;            /* misma altura base que WhatsApp */
-    right: 100px;            /* a la izquierda del WhatsApp */
-    background: var(--dorado-oscuro);
-    color: var(--fondo-oscuro);
-    border: none;
-    border-radius: 50px;     /* forma de píldora */
-    padding: 14px 22px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    font-family: var(--fuente-texto);
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(184, 146, 28, 0.35);
-    z-index: 1500;
-    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-
-.btn-flotante-escribenos i {
-    font-size: 1.2rem;
-}
-
-.btn-flotante-escribenos:hover {
-    background: var(--dorado);
-    box-shadow: 0 10px 28px rgba(211, 174, 54, 0.5);
-    transform: translateY(-3px);
-}
-/* ==========================================
-   13. BANNER DE PÁGINAS INTERNAS
-   ========================================== */
-.page-banner {
-    padding: 120px 5% 60px;
-    background: var(--fondo-superficie);
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.page-banner-titulo {
-    font-family: var(--fuente-titulos);
-    font-size: 3rem;
-    color: var(--dorado-claro);
-    margin-bottom: 12px;
-}
-
-.page-banner-descripcion {
-    color: var(--texto-secundario);
-    font-size: 1.1rem;
-}
-
-/* ==========================================
-   14. GRID DE ESPECIALIDADES (CON IMAGEN HOVER)
-   ========================================== */
-.especialidades {
-    padding: 60px 5%;
-    background: var(--fondo-oscuro);
-}
-
-.especialidades-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 28px;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-.especialidad-card {
-    position: relative;
-    background: var(--fondo-tarjeta);
-    border-radius: var(--borde-redondo);
-    overflow: hidden;
-    box-shadow: var(--sombra-chica);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    cursor: pointer;
-    min-height: 280px;
-}
-
-.especialidad-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--sombra-grande);
-    border-color: rgba(211, 174, 54, 0.2);
-}
-
-.card-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.especialidad-card:hover .card-image {
-    opacity: 1;
-}
-
-.card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(12, 22, 33, 0.75);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 2;
-}
-
-.especialidad-card:hover .card-overlay {
-    opacity: 1;
-}
-
-.card-content {
-    position: relative;
-    z-index: 3;
-    padding: 36px 28px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 280px;
-}
-
-.card-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: rgba(211, 174, 54, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 1.8rem;
-    color: var(--dorado);
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-
-.especialidad-card:hover .card-icon {
-    background: var(--dorado-oscuro);
-    color: var(--fondo-oscuro);
-    transform: scale(1.1);
-}
-
-.card-content h3 {
-    font-family: var(--fuente-titulos);
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: var(--texto-principal);
-}
-
-.card-content p {
-    font-size: 0.9rem;
-    color: var(--texto-secundario);
-    line-height: 1.6;
-}
-
-/* ==========================================
-   15. LABORATORIO PROTÉSICO
-   ========================================== */
-.protesis {
-    padding: 60px 5%;
-    background: var(--fondo-oscuro);
-}
-
-.protesis-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-.protesis-imagen {
-    position: relative;
-}
-
-.protesis-img-wrapper {
-    border-radius: var(--borde-redondo);
-    overflow: hidden;
-    box-shadow: var(--sombra-grande);
-}
-
-.protesis-placeholder {
-    background: linear-gradient(135deg, var(--dorado-oscuro) 0%, var(--rosa-oscuro) 100%);
-    height: 380px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--blanco);
-    font-size: 4.5rem;
-    gap: 16px;
-}
-
-.protesis-placeholder span {
-    font-family: var(--fuente-titulos);
-    font-size: 1.3rem;
-    letter-spacing: 4px;
-    font-weight: 600;
-}
-
-.protesis-card-flotante {
-    position: absolute;
-    bottom: -20px;
-    right: -20px;
-    background: var(--fondo-tarjeta);
-    border-radius: 12px;
-    padding: 16px 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: var(--sombra-grande);
-    font-weight: 600;
-    color: var(--dorado-claro);
-    font-size: 0.95rem;
-}
-
-.protesis-card-flotante i {
-    font-size: 1.6rem;
-    color: var(--dorado);
-}
-
-.protesis-contenido .section-label {
-    font-family: var(--fuente-texto);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.8rem;
-    color: var(--dorado);
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.protesis-contenido .section-title {
-    font-family: var(--fuente-titulos);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--texto-principal);
-    margin-bottom: 16px;
-    line-height: 1.2;
-}
-
-.protesis-destacado {
-    font-family: var(--fuente-titulos);
-    font-size: 1.3rem;
-    color: var(--dorado-claro);
-    font-weight: 600;
-    margin-bottom: 16px;
-    line-height: 1.4;
-}
-
-.protesis-texto {
-    color: var(--texto-secundario);
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.protesis-texto strong {
-    color: var(--dorado-claro);
-    font-weight: 600;
-}
-
-.protesis-lista {
-    list-style: none;
-    margin-bottom: 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.protesis-lista li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--texto-principal);
-    font-weight: 500;
-}
-
-.protesis-lista i {
-    color: var(--dorado);
-    font-size: 1rem;
-}
-
-.protesis-ventajas {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-}
-
-.ventaja-item {
-    text-align: center;
-    background: rgba(211, 174, 54, 0.1);
-    border-radius: 12px;
-    padding: 16px 20px;
-    min-width: 100px;
-    flex: 1;
-}
-
-.ventaja-num {
-    display: block;
-    font-family: var(--fuente-titulos);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--dorado);
-    line-height: 1.2;
-}
-
-.ventaja-texto {
-    font-size: 0.75rem;
-    color: var(--texto-apagado);
-    font-weight: 500;
-}
-
-/* ==========================================
-   16. SECCIÓN EQUIPO
-   ========================================== */
-.equipo {
-    padding: 60px 5%;
-    background: var(--fondo-oscuro);
-}
-
-.equipo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.equipo-card {
-    background: var(--fondo-tarjeta);
-    border-radius: var(--borde-redondo);
-    padding: 36px 24px;
-    text-align: center;
-    box-shadow: var(--sombra-chica);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.equipo-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--sombra-grande);
-    border-color: rgba(211, 174, 54, 0.2);
-}
-
-.equipo-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(211, 174, 54, 0.2), rgba(165, 91, 108, 0.2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 2.5rem;
-    color: var(--dorado);
-    transition: background 0.3s, color 0.3s;
-}
-
-.equipo-card:hover .equipo-avatar {
-    background: var(--rosa);
-    color: var(--blanco);
-}
-
-.equipo-card h3 {
-    font-family: var(--fuente-titulos);
-    font-size: 1.2rem;
-    color: var(--texto-principal);
-    margin-bottom: 6px;
-}
-
-.equipo-rol {
-    font-size: 0.85rem;
-    color: var(--dorado);
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.equipo-desc {
-    font-size: 0.85rem;
-    color: var(--texto-secundario);
-    line-height: 1.6;
 }
 
 /* ==========================================
@@ -1034,6 +1014,61 @@ body {
     font-weight: 600;
 }
 
+/* ===== 12. WHATSAPP FLOTANTE (REGLA BASE) ===== */
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 30px;          /* escritorio */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 1500;
+}
+
+.whatsapp-flotante:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 28px rgba(37, 211, 102, 0.6);
+}
+
+/* Nuevo botón Escribenos flotante */
+.btn-flotante-escribenos {
+    position: fixed;
+    bottom: 30px;            /* misma altura base que WhatsApp */
+    right: 100px;            /* a la izquierda del WhatsApp */
+    background: var(--dorado-oscuro);
+    color: var(--fondo-oscuro);
+    border: none;
+    border-radius: 50px;     /* forma de píldora */
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: var(--fuente-texto);
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(184, 146, 28, 0.35);
+    z-index: 1500;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-flotante-escribenos i {
+    font-size: 1.2rem;
+}
+
+.btn-flotante-escribenos:hover {
+    background: var(--dorado);
+    box-shadow: 0 10px 28px rgba(211, 174, 54, 0.5);
+    transform: translateY(-3px);
+}
 /* ==========================================
    18. MODAL (FORMULARIO FLOTANTE)
    ========================================== */
@@ -1089,7 +1124,6 @@ body {
     color: var(--dorado);
 }
 
-
 /* ==========================================
    19. MEDIA QUERIES AGRUPADAS POR TAMAÑO
    ========================================== */
@@ -1130,7 +1164,7 @@ body {
         font-size: 3.5rem;
     }
 
-    .protesis-contenido .section-title {
+    .protesis-contenido .seccion-titulo {
         font-size: 1.8rem;
     }
 
@@ -1148,9 +1182,8 @@ body {
 /* ----- 19.2 MÓVIL GRANDE / TABLET PEQUEÑA (hasta 768px) ----- */
 @media (max-width: 768px) {
 
-    /* Header y menú */
     html {
-        scroll-padding-top: 65px;   /* header más bajo en móvil */
+        scroll-padding-top: 65px;
     }
 
     .navbar {
@@ -1189,45 +1222,42 @@ body {
         font-size: 1rem;
     }
 
-    .btn-header {
-        display: inline-block;
-        padding: 8px 16px;
-        font-size: 0.8rem;
-    }
-
     .navbar {
         padding: 0 3%;
     }
 
     /* Hero */
     .hero {
-    padding: 140px 5% 100px 5%;   /* mucho espacio abajo */
-    min-height: auto;
-    justify-content: flex-start;
-}
+        padding: 140px 5% 80px 5%;
+        min-height: auto;
+        justify-content: flex-start;
+    }
 
-.hero-titulo {
-    font-size: 3.2rem;
-    letter-spacing: 6px;
-}
+    .hero-titulo {
+        font-size: 3.2rem;
+        letter-spacing: 6px;
+    }
 
-.hero-eslogan {
-    font-size: 1.2rem;
-}
+    .hero-tagline {
+        font-size: 1.2rem;
+    }
 
-.hero-descripcion {
-    font-size: 0.95rem;
-}
+    .hero-descripcion {
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
 
-.hero-botones {
-    flex-direction: column;
-    align-items: center;
-}
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 30px;
+        display: flex;
+    }
 
-/* Ajuste del indicador en esta resolución */
-.scroll-indicator {
-    bottom: 50px;
-}
+    .scroll-indicador {
+        bottom: 50px;
+    }
 
     /* Resumen */
     .resumen {
@@ -1246,34 +1276,24 @@ body {
         flex: 1 1 200px;
     }
 
-    /* Footer */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 30px;
+    /* Especialidades */
+    .especialidades {
+        padding: 60px 5% 40px;
+        margin-bottom: 20px;
     }
 
-    .footer-logo {
-        align-items: center;
-    }
-
-    .redes-iconos {
-        justify-content: center;
-    }
-
-    .logo-img-footer {
-        width: 80%;
-        max-width: 280px;
-        margin-top: -100px;
-    }
-
-    .footer-enlaces {
-        margin-top: -120px;
+    .especialidades-grid {
+        gap: 20px;
     }
 
     /* Laboratorio */
     .protesis {
-        padding: 40px 5%;
+        padding: 40px 5% 60px;
+        margin-bottom: 20px;
+    }
+
+    .protesis-container {
+        gap: 30px;
     }
 
     .protesis-lista {
@@ -1284,7 +1304,7 @@ body {
         flex-direction: column;
     }
 
-    .protesis-card-flotante {
+    .floating-card {
         right: 0;
         bottom: -15px;
         font-size: 0.8rem;
@@ -1322,7 +1342,8 @@ body {
         height: 300px;
     }
 
-.btn-flotante-escribenos {
+    /* Botones flotantes (más arriba para no pegarse al footer) */
+    .btn-flotante-escribenos {
         bottom: 20px;
         right: 80px;
         padding: 12px 18px;
@@ -1335,6 +1356,31 @@ body {
         width: 50px;
         height: 50px;
         font-size: 1.6rem;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .footer-logo {
+        align-items: center;
+    }
+
+    .redes-iconos {
+        justify-content: center;
+    }
+
+    .logo-img-footer {
+        width: 80%;
+        max-width: 280px;
+        margin-top: -100px;
+    }
+
+    .footer-enlaces {
+        margin-top: -120px;
     }
 }
 
@@ -1361,7 +1407,7 @@ body {
 }
 
 /* Indicador más pegado abajo pero aún visible */
-.scroll-indicator {
+.scroll-indicador {
     bottom: 40px;
 }
 
@@ -1389,8 +1435,8 @@ body {
     }
 
     .btn-flotante-escribenos {
-        bottom: 20px;
-        right: 75px;
+        bottom: 20px; /* Misma altura que WhatsApp */
+        right: 75px;  /* Lo coloca justo a la izquierda del WhatsApp */
         padding: 10px 16px;
         font-size: 0.75rem;
         gap: 6px;
@@ -1401,52 +1447,64 @@ body {
     }
 
     .whatsapp-flotante {
-        bottom: 20px;
+        bottom: 20px; /* Fuerza a bajar el botón */
         right: 15px;
         width: 45px;
         height: 45px;
         font-size: 1.4rem;
     }
-}
 
-/* ==========================================
-   21. PARCHE FINAL – OCULTAR HAMBURGUESA EN ESCRITORIO
-   ========================================== */
-@media (min-width: 769px) {
-    .hamburguesa {
-        display: none !important;
+     /* Aumenta la separación de los botones flotantes */
+    .btn-flotante-escribenos {
+        bottom: 20px;       /* más arriba para no tapar contenido */
+        right: 75px;
+    }
+
+    .whatsapp-flotante {
+        bottom: 20px;
+        right: 15px;
     }
 }
-/* ==========================================
-   20. INDICADOR DE SCROLL (tres círculos)
-   ========================================== */
-.scroll-indicator {
-    position: absolute;
-    bottom: 80px;          /* un poco más arriba que el borde */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    z-index: 3;
-    animation: bounceDown 2s ease infinite;
+
+
+/* ============================================================
+   SCROLL REVEAL (AOS)
+   ============================================================ */
+[data-aos] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.scroll-indicator span {
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;   /* usa tu variable de color */
-    opacity: 0.7;
+[data-aos].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@keyframes bounceDown {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(12px);
-    }
+[data-aos="fade-right"] {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+[data-aos="fade-right"].aos-animate {
+    transform: translateX(0);
+}
+
+[data-aos="fade-left"] {
+    opacity: 0;
+    transform: translateX(20px);
+}
+[data-aos="fade-left"].aos-animate {
+    transform: translateX(0);
+}
+
+[data-aos="zoom-in"] {
+    transform: scale(0.9);
+}
+[data-aos="zoom-in"].aos-animate {
+    transform: scale(1);
+}
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
