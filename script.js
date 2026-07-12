@@ -116,19 +116,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // ================================================================
     // BLOQUE 8: MODAL (ABRIR / CERRAR)
     // ================================================================
-    function abrirModal() {
-        if (modal) {
-            modal.classList.add('activo');
-            document.body.style.overflow = 'hidden';
-        }
-    }
+function abrirModal() {
+    if (!modal) return;
 
-    function cerrarModal() {
-        if (modal) {
-            modal.classList.remove('activo');
-            document.body.style.overflow = '';
-        }
-    }
+    modal.classList.add("activo");
+    document.documentElement.style.overflow = "hidden";
+}
+
+function cerrarModal() {
+    if (!modal) return;
+
+    modal.classList.remove("activo");
+    document.documentElement.style.overflow = "";
+}
 
     if (btnEscribenosFlotante) {
         btnEscribenosFlotante.addEventListener('click', abrirModal);
